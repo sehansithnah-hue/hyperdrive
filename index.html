@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="dark">
+    <title>HyperDrive: The Ultimate Car Encyclopedia</title>
+    <style>
+        /* --- PERFORMANCE OPTIMIZATIONS --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: auto;
+        }
+
+        body {
+            background: #0a0f1a;
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            font-family: system-ui, -apple-system, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Simplified gradient - avoid complex radial gradients */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, #111e30 0%, #050914 100%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* --- HEADER --- */
+        header {
+            text-align: center;
+            padding: clamp(40px, 10vh, 60px) 20px;
+            position: relative;
+        }
+
+        header h1 {
+            font-size: clamp(2.5rem, 8vw, 3.5rem);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            background: linear-gradient(90deg, #ff007f 0%, #00f0ff 50%, #ff007f 100%);
+            background-size: 200% 100%;
+            background-position: 0% center;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            will-change: background-position;
+            animation: shine 6s ease-in-out infinite;
+        }
+
+        header p {
+            color: #8a99ad;
+            font-size: 1rem;
+            margin-top: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        @keyframes shine {
+            0%, 100% { background-position: 0% center; }
+            50% { background-position: 100% center; }
+        }
+
+        /* --- SPOTLIGHT CONTAINER --- */
+        .spotlight-container {
+            max-width: 1000px;
+            margin: 0 auto 60px;
+            background: rgba(10, 15, 26, 0.4);
+            border: 1px solid rgba(0, 240, 255, 0.15);
+            border-radius: 16px;
+            padding: 40px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 8px 32px rgba(0, 240, 255, 0.03);
+            will-change: box-shadow, transform;
+            transform: translateZ(0);
+        }
+
+        .spotlight-brand {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            color: #00f0ff;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
+            letter-spacing: 2px;
+        }
+
+        .spotlight-tagline {
+            font-style: italic;
+            color: #ff007f;
+            margin-bottom: 16px;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .spotlight-desc {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #cbd5e1;
+        }
+
+        /* --- BRANDS GRID --- */
+        .brands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 100px;
+        }
+
+        /* --- BRAND CARDS --- */
+        .brand-card {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            height: 200px;
+            cursor: pointer;
+            perspective: 1000px;
+            will-change: transform;
+            transform: translateZ(0);
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            transform-style: preserve-3d;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+        }
+
+        .brand-card:hover .card-inner {
+            transform: rotateY(180deg);
+            border-color: rgba(0, 240, 255, 0.4);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .card-front {
+            background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.01) 100%);
+        }
+
+        .card-front h2 {
+            font-size: 1.8rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .card-front .origin {
+            font-size: 0.85rem;
+            color: #8a99ad;
+            margin-top: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        .card-back {
+            background: rgba(10, 17, 36, 0.8);
+            transform: rotateY(180deg);
+            color: #cbd5e1;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .card-back p {
+            margin: 0;
+        }
+
+        .click-hint {
+            margin-top: 12px;
+            font-size: 0.75rem;
+            color: #ff007f;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+
+        /* --- PULSE ANIMATION (OPTIMIZED) --- */
+        .pulse-active {
+            animation: glow-burst 0.4s ease-out;
+        }
+
+        @keyframes glow-burst {
+            0% {
+                box-shadow: 0 8px 32px rgba(0, 240, 255, 0.08);
+            }
+            50% {
+                box-shadow: 0 8px 40px rgba(0, 240, 255, 0.25);
+            }
+            100% {
+                box-shadow: 0 8px 32px rgba(0, 240, 255, 0.03);
+            }
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .brands-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 16px;
+                padding: 0 16px 60px;
+            }
+
+            .spotlight-container {
+                padding: 30px 20px;
+                margin: 0 auto 40px;
+            }
+
+            header {
+                padding: 30px 20px;
+            }
+        }
+
+        /* --- PERFORMANCE: Disable expensive animations on low-end devices --- */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>HyperDrive</h1>
+        <p>Interactive Car Brand Encyclopedia</p>
+    </header>
+
+    <main>
+        <div class="spotlight-container" id="spotlight">
+            <div class="spotlight-brand" id="s-title">Select a Brand</div>
+            <div class="spotlight-tagline" id="s-tag">Hover to flip cards • Click to view</div>
+            <div class="spotlight-desc" id="s-desc">
+                Click any automotive brand below to load its deep heritage into this display.
+            </div>
+        </div>
+
+        <div class="brands-grid" id="grid"></div>
+    </main>
+
+    <script>
+        // Car brands data
+        const carBrands = [
+            { name: "Ferrari", origin: "Italy", tag: "The Prancing Horse", desc: "Founded by Enzo Ferrari in 1939. Renowned for Formula 1 racing dominance and high-performance exotic supercars that define speed, wealth, and luxury." },
+            { name: "Tesla", origin: "USA", tag: "The Electric Revolution", desc: "An American clean energy pioneer that transformed global transportation by making long-range electric vehicles (EVs) fast, cool, and mainstream with bleeding-edge software." },
+            { name: "Toyota", origin: "Japan", tag: "Unstoppable Reliability", desc: "The world's largest automaker. Famous for inventing elite manufacturing systems and creating hyper-reliable everyday vehicles like the Corolla, Hilux, and Prius hybrid." },
+            { name: "Porsche", origin: "Germany", tag: "Engineered Perfection", desc: "Master craftsmen of everyday sports cars. The iconic rear-engine Porsche 911 has spent over 60 years setting the industry standard for precision handling and racetrack durability." },
+            { name: "Lamborghini", origin: "Italy", tag: "Aggressive Outrageousness", desc: "Born from a tractor manufacturer's feud with Ferrari. Lamborghini builds wild, sharp-angled supercars powered by roaring V10 and V12 engines designed to turn every head." },
+            { name: "BMW", origin: "Germany", tag: "The Ultimate Driving Machine", desc: "Bayerische Motoren Werke focuses heavily on driver-centric performance engineering, premium sports sedans, and luxury driving dynamics." },
+            { name: "Rolls-Royce", origin: "UK", tag: "Pinnacle Luxury", desc: "Hand-built ultra-luxury motorcars where cost is no object. Famous for whisper-quiet cabins, starlight headliners, and the smoothest rides on the planet." },
+            { name: "Ford", origin: "USA", tag: "The Industrial Foundation", desc: "Henry Ford revolutionized the world in 1908 with the moving assembly line. Home to the legendary Mustang muscle car and the best-selling F-150 trucks." }
+        ];
+
+        // Cached DOM elements
+        const grid = document.getElementById('grid');
+        const spotlight = document.getElementById('spotlight');
+        const sTitle = document.getElementById('s-title');
+        const sTag = document.getElementById('s-tag');
+        const sDesc = document.getElementById('s-desc');
+
+        // Debounced update to prevent excessive reflows
+        let animationFrame = null;
+        function updateSpotlight(brand) {
+            if (animationFrame) cancelAnimationFrame(animationFrame);
+            
+            animationFrame = requestAnimationFrame(() => {
+                sTitle.textContent = brand.name;
+                sTag.textContent = brand.tag;
+                sDesc.textContent = brand.desc;
+
+                // Trigger pulse animation
+                spotlight.classList.remove('pulse-active');
+                void spotlight.offsetHeight; // Force reflow (minimal cost)
+                spotlight.classList.add('pulse-active');
+            });
+        }
+
+        // Build grid once (not on every render)
+        const fragment = document.createDocumentFragment();
+        
+        carBrands.forEach(brand => {
+            const card = document.createElement('div');
+            card.className = 'brand-card';
+            card.innerHTML = `
+                <div class="card-inner">
+                    <div class="card-front">
+                        <h2>${brand.name}</h2>
+                        <div class="origin">${brand.origin}</div>
+                        <div class="click-hint">Click Spotlight</div>
+                    </div>
+                    <div class="card-back">
+                        <p><strong>Motto:</strong><br>${brand.tag}</p>
+                    </div>
+                </div>
+            `;
+
+            // Event delegation - single listener per card
+            card.addEventListener('click', () => {
+                updateSpotlight(brand);
+            });
+
+            fragment.appendChild(card);
+        });
+
+        grid.appendChild(fragment);
+
+        // Preload fonts if using custom ones (optional)
+        if ('fonts' in document) {
+            document.fonts.ready.then(() => {
+                document.body.style.opacity = '1';
+            });
+        }
+    </script>
+</body>
+</html>

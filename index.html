@@ -251,7 +251,7 @@
 
     <header>
         <h1>HyperDrive</h1>
-        <p>Interactive Car Brand Encyclopedia</p>
+        <p>Interactive Car Brand & Model Encyclopedia</p>
     </header>
 
     <main>
@@ -259,7 +259,7 @@
             <div class="spotlight-brand" id="s-title">Select a Brand</div>
             <div class="spotlight-tagline" id="s-tag">Hover to flip cards • Click to view</div>
             <div class="spotlight-desc" id="s-desc">
-                Click any automotive brand below to load its deep heritage into this display.
+                Click any automotive brand or model below to load its deep heritage into this display.
             </div>
         </div>
 
@@ -267,7 +267,7 @@
     </main>
 
     <script>
-        // Car brands data
+        // Car brands and models data
         const carBrands = [
             { name: "Ferrari", origin: "Italy", tag: "The Prancing Horse", desc: "Founded by Enzo Ferrari in 1939. Renowned for Formula 1 racing dominance and high-performance exotic supercars that define speed, wealth, and luxury." },
             { name: "Tesla", origin: "USA", tag: "The Electric Revolution", desc: "An American clean energy pioneer that transformed global transportation by making long-range electric vehicles (EVs) fast, cool, and mainstream with bleeding-edge software." },
@@ -276,7 +276,50 @@
             { name: "Lamborghini", origin: "Italy", tag: "Aggressive Outrageousness", desc: "Born from a tractor manufacturer's feud with Ferrari. Lamborghini builds wild, sharp-angled supercars powered by roaring V10 and V12 engines designed to turn every head." },
             { name: "BMW", origin: "Germany", tag: "The Ultimate Driving Machine", desc: "Bayerische Motoren Werke focuses heavily on driver-centric performance engineering, premium sports sedans, and luxury driving dynamics." },
             { name: "Rolls-Royce", origin: "UK", tag: "Pinnacle Luxury", desc: "Hand-built ultra-luxury motorcars where cost is no object. Famous for whisper-quiet cabins, starlight headliners, and the smoothest rides on the planet." },
-            { name: "Ford", origin: "USA", tag: "The Industrial Foundation", desc: "Henry Ford revolutionized the world in 1908 with the moving assembly line. Home to the legendary Mustang muscle car and the best-selling F-150 trucks." }
+            { name: "Ford", origin: "USA", tag: "The Industrial Foundation", desc: "Henry Ford revolutionized the world in 1908 with the moving assembly line. Home to the legendary Mustang muscle car and the best-selling F-150 trucks." },
+            
+            // 45 Additional Brands and Models
+            { name: "McLaren", origin: "UK", tag: "Speed & Innovation", desc: "British hypercar manufacturer known for cutting-edge technology and extreme performance vehicles. The McLaren F1 was the world's fastest car for over a decade." },
+            { name: "Bugatti", origin: "France", tag: "Quad-Turbo Madness", desc: "Producer of the world's most powerful and fastest hypercars. The Bugatti Chiron reaches 304 mph with 1,479 horsepower from a quad-turbocharged W16 engine." },
+            { name: "Aston Martin", origin: "UK", tag: "British Elegance", desc: "Iconic British luxury sports car manufacturer famous for James Bond films and bespoke engineering. Every Aston Martin is hand-crafted for perfection." },
+            { name: "Jaguar", origin: "UK", tag: "Grace, Pace & Space", desc: "Legendary British carmaker producing sleek, powerful sports cars and luxury sedans. The E-Type is considered one of the most beautiful cars ever made." },
+            { name: "Bentley", origin: "UK", tag: "Extreme Luxury", desc: "Ultra-premium British manufacturer of hand-built motorcars for the world's most discerning clientele. Known for opulence, power, and timeless elegance." },
+            { name: "Lamborghini Huracán", origin: "Italy", tag: "Mid-Engine Supercar", desc: "The successor to the legendary Lamborghini Gallardo. The Huracán delivers 640 horsepower and can accelerate from 0-60 mph in 2.9 seconds." },
+            { name: "Ferrari 488", origin: "Italy", tag: "Turbocharged Icon", desc: "Revolutionary mid-engine Ferrari featuring a 3.9L twin-turbo V8 producing 720 horsepower. Blends tradition with cutting-edge performance technology." },
+            { name: "Porsche 911 Turbo", origin: "Germany", tag: "Turbocharged Legend", desc: "The pinnacle of 911 engineering. The Turbo variant combines precision handling with brutal acceleration and 650+ horsepower of controlled chaos." },
+            { name: "Mercedes-AMG", origin: "Germany", tag: "Performance Dynamics", desc: "Mercedes' high-performance division creating track-focused supercars and luxury performance vehicles with hand-assembled engines." },
+            { name: "Audi R8", origin: "Germany", tag: "Supercar Engineering", desc: "Mid-engine supercar combining Audi's technological prowess with supercar thrills. The V10 engine produces 620 horsepower of pure German engineering." },
+            { name: "Chevrolet Corvette", origin: "USA", tag: "American Muscle", desc: "America's sports car. The Corvette has been breaking performance barriers since 1953. The C8 introduces mid-engine design with 495 horsepower." },
+            
+            { name: "Dodge Charger", origin: "USA", tag: "Muscle Car Legacy", desc: "The Dodge Charger represents American muscle car heritage. Available with supercharged engines producing up to 807 horsepower." },
+            { name: "Nissan GT-R", origin: "Japan", tag: "Godzilla", desc: "The legendary Nissan GT-R is a Japanese supercar killer. Twin-turbo V6 engine produces 565 horsepower with all-wheel-drive perfection." },
+            { name: "Honda NSX", origin: "Japan", tag: "Hybrid Supercar", desc: "The Honda NSX is a technological marvel combining a hybrid powertrain with supercar performance. 573 total horsepower from petrol and electric motors." },
+            { name: "Mazda RX-7", origin: "Japan", tag: "Rotary Legend", desc: "Iconic sports car famous for its unique rotary engine. The RX-7 became a legend through racing and street performance enthusiasts worldwide." },
+            { name: "Subaru WRX", origin: "Japan", tag: "Rally Royalty", desc: "Born from World Rally Championship success, the WRX combines turbocharged performance with legendary all-wheel-drive grip." },
+            { name: "Mitsubishi Lancer Evo", origin: "Japan", tag: "Rally Fighter", desc: "The Mitsubishi Lancer Evolution dominated rally racing. 4G63 turbo engines and all-wheel-drive made it a street-legal race car." },
+            { name: "Toyota Supra", origin: "Japan", tag: "Twin-Turbo Icon", desc: "The legendary A80 Supra features a 3.0L twin-turbo inline-6 producing 320 hp. A modern icon in the sports car world with 382 horsepower." },
+            { name: "Infiniti Q60", origin: "Japan", tag: "Luxury Performance", desc: "Infiniti's premium sports coupe with 400 horsepower dual-turbo V6. Combines Japanese luxury with turbocharged performance thrills." },
+            { name: "Lexus LFA", origin: "Japan", tag: "V10 Perfection", desc: "Limited-edition Lexus hypercar with naturally-aspirated 10-cylinder engine. Produces 552 horsepower and legendary Formula 1 sound." },
+            { name: "Tesla Model S Plaid", origin: "USA", tag: "Electric Acceleration", desc: "Three electric motors deliver 1,020 horsepower. 0-60 mph in 1.99 seconds makes it faster than most supercars in straight-line performance." },
+            { name: "Lucid Air", origin: "USA", tag: "Range Meets Speed", desc: "Electric luxury sedan with up to 1,111 horsepower. Combines 500+ mile range with blistering performance from multiple electric motors." },
+            { name: "Rimac Concept_One", origin: "Croatia", tag: "Electric Hypercar", desc: "Croatian electric hypercar with 1,224 horsepower. Proves that electric vehicles can deliver supercar performance with cutting-edge technology." },
+            { name: "Pagani Huayra", origin: "Italy", tag: "Carbon Fiber Art", desc: "Italian hypercar hand-built with carbon fiber monocoque chassis. Twin-turbocharged V12 produces 720 horsepower of precision engineering." },
+            { name: "Koenigsegg Agera", origin: "Sweden", tag: "Twin-Turbo Hypercar", desc: "Swedish hypercar with adjustable twin-turbo V8 producing 1,115 horsepower. Holds land speed records and pushes automotive engineering limits." },
+            { name: "Hennessey Venom F5", origin: "USA", tag: "Twin-Turbo Beast", desc: "American hypercar aiming for 300+ mph. Twin-turbo LS V8 produces 1,817 horsepower of raw American excess." },
+            { name: "SSC Tuatara", origin: "USA", tag: "Hypercar Perfection", desc: "Twin-turbo V8 hypercar claiming 1,750+ horsepower. Designed specifically to break the 300 mph barrier with aerodynamic precision." },
+            { name: "Acura NSX Type R", origin: "Japan", tag: "R-Performance", desc: "High-performance variant of the Honda NSX with enhanced suspension, brakes, and aerodynamics. Stripped down for pure track focus." },
+            { name: "Cadillac CTS-V", origin: "USA", tag: "American Luxury Sport", desc: "American luxury sedan with supercharged V8 producing 640 horsepower. Delivers sedan practicality with supercar acceleration." },
+            { name: "Genesis G70", origin: "South Korea", tag: "Korean Luxury", desc: "Hyundai's luxury performance sedan. Combines Korean engineering with German-inspired handling and turbocharged power." },
+            { name: "Kia Stinger", origin: "South Korea", tag: "Value Performance", desc: "Korean performance sedan proving great cars don't need European badges. Twin-turbo V6 offers genuine sports car thrills." },
+            { name: "Alfa Romeo Giulia Quadrifoglio", origin: "Italy", tag: "Italian Passion", desc: "Modern Italian performance sedan with 505 horsepower V6. Combines Ferrari DNA with four-door practicality and legendary handling." },
+            { name: "Maserati MC20", origin: "Italy", tag: "Modena Masterpiece", desc: "New Maserati hypercar with 621 horsepower V6. Combines Italian design elegance with cutting-edge hybrid performance technology." },
+            { name: "Bugatti Chiron Sport", origin: "France", tag: "Track Hypercar", desc: "Road-legal race car with 1,479 horsepower quad-turbo W16. Proves that even hypercars can be refined and drivable." },
+            { name: "Lamborghini Aventador", origin: "Italy", tag: "Madness Unleashed", desc: "Legendary V12 supercar with 740 horsepower. Produced from 2011-2024, it defined a generation of hypercar performance." },
+            { name: "Ferrari F40", origin: "Italy", tag: "Legend Status", desc: "Enzo Ferrari's last personally approved car. 478 horsepower twin-turbo V8 made it the first production car over 200 mph." },
+            { name: "Porsche 918 Spyder", origin: "Germany", tag: "Hybrid Hypercar", desc: "Hybrid hypercar with 918 horsepower combining V8 and electric motors. Sets lap records while achieving 78 mpg equivalent." },
+            { name: "McLaren P1", origin: "UK", tag: "Hybrid Beast", desc: "Hybrid hypercar with 903 horsepower. Twin-turbo V8 and electric motors create the ultimate McLaren performance machine." },
+            { name: "Mercedes-AMG One", origin: "Germany", tag: "F1 Engine", desc: "Road-legal race car with 1,063 horsepower F1 engine. Most powerful Mercedes ever, limited to 275 units worldwide." },
+            { name: "Ferrari LaFerrari", origin: "Italy", tag: "Hybrid Icon", desc: "Limited edition hypercar with 963 horsepower hybrid system. The last naturally-aspirated Ferrari represents the pinnacle of performance." }
         ];
 
         // Cached DOM elements
